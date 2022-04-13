@@ -1,7 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
     My Blog
 {% endblock title%}
+{% block css_files %}
+<link rel="stylesheet" href={% static 'blog/post.css' %}>
+<link rel="stylesheet" href={% static 'blog/index.css' %}>
+{% endblock  %}
 {% block page_content %}
-<h1>Hey this is my blog !</h1>
-{% endblock page_content%}
+<section id="welcome">
+    <header>
+        <img src={% static 'blog/images/My_photo.jpg' %} alt="Remez - The Authtor Of This Blog">
+        <h2>Remez's BLOG </h2>
+    </header>
+    <p>Hi, I'm Remez and I love gaming and tech in general!</p>
+</section>
+<section id="latest-posts">
+    <h2>My Latest Thoughts</h2>
+    <ul>
+        {% for post in posts %}
+        {% include 'blog/includes/post.html' %}
+        {% endfor %}
+    </ul>
+</section>
+<section id="about">
+    <h2>What I do</h2>
+    <p>God Created Programing for a reason!</p>
+    <p>My Goal is to keep on growing as a developer!</p>
+</section>
+{% endblock page_content %}

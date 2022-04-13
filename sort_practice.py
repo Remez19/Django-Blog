@@ -1,13 +1,10 @@
 from datetime import date
-from django.shortcuts import render
 
-# Create your views here.
-
-all_posts = [
+posts = [
     {
         "slug": "hike-in-the-mountains",
         "image": "mountains.jpg",
-        "author": "Remez",
+        "author": "Maximilian",
         "date": date(2021, 7, 21),
         "title": "Mountain Hiking",
         "excerpt": "There's nothing like the views you get when hiking in the mountains! And I wasn't even prepared for what happened whilst I was enjoying the view!",
@@ -28,7 +25,7 @@ all_posts = [
     {
         "slug": "programming-is-fun",
         "image": "coding.jpg",
-        "author": "Remez",
+        "author": "Maximilian",
         "date": date(2022, 3, 10),
         "title": "Programming Is Great!",
         "excerpt": "Did you ever spend hours searching that one error in your code? Yep - that's what happened to me yesterday...",
@@ -49,9 +46,30 @@ all_posts = [
     {
         "slug": "into-the-woods",
         "image": "woods.jpg",
-        "author": "Remez",
+        "author": "Maximilian",
         "date": date(2020, 8, 5),
         "title": "Nature At Its Best",
+        "excerpt": "Nature is amazing! The amount of inspiration I get when walking in nature is incredible!",
+        "content": """
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
+          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
+          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
+
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
+          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
+          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
+
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
+          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
+          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
+        """
+    },
+    {
+        "slug": "into-the-depths",
+        "image": "woods.jpg",
+        "author": "Remez",
+        "date": date(2020, 8, 6),
+        "title": "Nature At Its Worst",
         "excerpt": "Nature is amazing! The amount of inspiration I get when walking in nature is incredible!",
         "content": """
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
@@ -69,28 +87,14 @@ all_posts = [
     }
 ]
 
-# A function to sort out the posts by the date key value.
-
 
 def get_date(post):
     return post.get("date")
 
 
-def starting_page(request):
-    sorted_posts = sorted(all_posts, key=get_date, reverse=True)
-    return render(request, "blog/index.html", {
-        "posts": sorted_posts[:3]
-    })
-
-
-def posts(request):
-    return render(request, "blog/all-posts.html", {
-        "all_posts": all_posts
-    })
-
-
-def post_detail(request, slug):
-    the_post = next(post for post in all_posts if post['slug'] == slug)
-    return render(request, "blog/post-detail.html", {
-        "post": the_post
-    })
+if __name__ == "__main__":
+    # posts.sort(key=get_date)
+    # sorted(iterable, key=key, reverse=reverse)
+    sorted_posts = sorted(posts, key=get_date, reverse=True)
+    for post in sorted_posts[:3]:
+        print(post.get('date'))
